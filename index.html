@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium BMI Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    </head>
+<body data-theme="light">
+    <div class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme" role="button" tabindex="0">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+    </div>
+
+    <div class="container">
+        <div class="glass-card">
+            <header class="header">
+                <h1 class="title">Premium BMI Calculator</h1>
+                <p class="subtitle">Calculate your Body Mass Index with precision</p>
+            </header>
+
+            <form id="bmiForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="heightInput">Height</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="number" id="heightInput" step="0.1" min="0" required 
+                                       aria-describedby="heightHelp" placeholder="Enter height">
+                                <div id="heightHelp" class="sr-only">Enter your height</div>
+                            </div>
+                            <div class="form-group">
+                                <select id="heightUnit" aria-label="Height unit">
+                                    <option value="cm">cm</option>
+                                    <option value="ft">ft/in</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="heightInches" class="form-group" style="display: none;">
+                            <label for="inchesInput">Inches</label>
+                            <input type="number" id="inchesInput" min="0" max="11" placeholder="0-11 inches">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weightInput">Weight</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="number" id="weightInput" step="0.1" min="0" required 
+                                       aria-describedby="weightHelp" placeholder="Enter weight">
+                                <div id="weightHelp" class="sr-only">Enter your weight</div>
+                            </div>
+                            <div class="form-group">
+                                <select id="weightUnit" aria-label="Weight unit">
+                                    <option value="kg">kg</option>
+                                    <option value="lbs">lbs</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" class="btn btn-primary" aria-describedby="calculateHelp">
+                        Calculate BMI
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="resetCalculator()" 
+                            aria-describedby="resetHelp">
+                        Reset All
+                    </button>
+                </div>
+                <div id="calculateHelp" class="sr-only">Calculate your BMI based on entered values</div>
+                <div id="resetHelp" class="sr-only">Clear all inputs and saved data</div>
+            </form>
+
+            <div id="resultContainer" class="result-container" role="region" aria-live="polite" aria-label="BMI Results">
+                <div class="result-card">
+                    <div class="bmi-value" id="bmiValue" aria-label="BMI Value"></div>
+                    <div class="bmi-category" id="bmiCategory" aria-label="BMI Category"></div>
+                    
+                    <div class="progress-container">
+                        <div>BMI Range Progress</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="health-message" id="healthMessage" role="complementary"></div>
+                    <div class="health-tip" id="healthTip"></div>
+                    <div class="timestamp" id="timestamp"></div>
+                </div>
+            </div>
+
+            <div class="bmi-chart">
+                <div class="chart-toggle" onclick="toggleChart()" role="button" tabindex="0" 
+                     aria-expanded="false" aria-controls="chartContent">
+                    <span>BMI Categories Reference Chart</span>
+                    <span id="chartIcon">▼</span>
+                </div>
+                <div class="chart-content" id="chartContent" role="region" aria-labelledby="chartToggle">
+                    <div class="chart-item">
+                        <span>Underweight</span>
+                        <span>BMI &lt; 18.5</span>
+                    </div>
+                    <div class="chart-item">
+                        <span>Normal weight</span>
+                        <span>BMI 18.5 - 24.9</span>
+                    </div>
+                    <div class="chart-item">
+                        <span>Overweight</span>
+                        <span>BMI 25.0 - 29.9</span>
+                    </div>
+                    <div class="chart-item">
+                        <span>Obese Class I</span>
+                        <span>BMI 30.0 - 34.9</span>
+                    </div>
+                    <div class="chart-item">
+                        <span>Obese Class II</span>
+                        <span>BMI 35.0 - 39.9</span>
+                    </div>
+                    <div class="chart-item">
+                        <span>Obese Class III</span>
+                        <span>BMI ≥ 40.0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p> © 2025 All rights reserved.  |  Designed and developed by Ganesh Reddy.   </p>
+    </footer>
+
+    <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
